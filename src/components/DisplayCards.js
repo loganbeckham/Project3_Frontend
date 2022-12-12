@@ -1,7 +1,14 @@
-import React from 'react'
-import { RepeatWrapping } from 'three'
+import {useState} from 'react'
+import Edit from './edit'
 
 const DisplayCards = (props) => {
+
+    const [showUpdateForm, setShowUpdateForm] = useState(false)
+
+    const showForm = () => {
+        setShowUpdateForm(true)
+    }
+
     return (
         <>
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -12,6 +19,12 @@ const DisplayCards = (props) => {
                         <p className='card-text'>{props.location.city}</p>
                         <p className='card-text'>{props.location.rating} Stars</p>
                     </div>
+                    {showUpdateForm ?
+                    <Edit location={props.location} setLocation={props.setLocation} setShowUpdateForm={setShowUpdateForm}/>
+                    :
+                    <button onClick={showForm}>Edit</button>
+                    }
+                    <button onClick={ (event) => {props.handleDelete(props.location)}}>Delete Location</button>
                 </div>
             </div>
         </>
