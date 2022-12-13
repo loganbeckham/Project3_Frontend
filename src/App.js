@@ -9,6 +9,10 @@ import DisplayCards from './components/DisplayCards'
 function App() {
 
     const [locations, setLocations] = useState([])
+
+    const [showCard, setShowCard] = useState(false)
+    const [showLocation, setShowLocation] = useState([])
+    
     //POST VARIABLES
     const [newLocation, setNewLocation] = useState('')
     const [newCity, setNewCity] = useState('')
@@ -17,6 +21,15 @@ function App() {
     const [newImage, setNewImage] = useState('')
     const [newRating, setNewRating] = useState('')
     const [newTags, setNewTags] = useState('')
+
+    const cardDisplay = (props) => {
+        setShowCard(!showCard)
+        setShowLocation(props)
+    }
+
+    const loggy = () => {
+        console.log(showLocation)
+    }
 
 
     // POST FORM FUNCTIONS
@@ -81,6 +94,13 @@ function App() {
             })
     })
 
+    // SHOW ROUTE
+    // const getShowLocation = () => {
+    //     axios
+    //         .get(`https://project3-travelapp-backend.herokuapp.com/locations${}`)
+    // }
+    
+
     // DELETE ROUTE
     const handleDelete = (locationData) => {
         axios
@@ -106,15 +126,51 @@ function App() {
                 </div>
             </nav>
             <div>
+                { showCard ?
+                <>
+                <div>
+                    <div className='location-header'>
+                        <h1 className='ms-5 mt-4'>{showLocation.location}</h1>
+                        <div className='location-subheading'>
+                            <div>
+                                <p className='ms-5'>{showLocation.city} • {showLocation.rating} Stars</p>
+                            </div>
+                            <div>
+                                <p className='me-5'>Share • Save</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='location-body'>
+                        <div className='card' style={{width: '30vw'}}>
+                            <div className='card-body m-5'>
+                                <h5>Shared by ASDF</h5>
+                                <p className='card-text'>{showLocation.description}</p>
+                                
+                            </div>
+                            <p className='m-5'>{showLocation.tags}</p>        
+                        </div>
+                        <div className='location-image-container' >
+                            <img className='location-image ms-5 mt-3' style={{minHeight: '50vh'}} src={showLocation.image}/>
+                        </div>
+                    </div>
+                </div>
+
+                <button onClick={loggy}>
+                    loggy
+                </button>
+                <button onClick={cardDisplay}>back</button>
+                </>
+                :
                 <div className='row'>
                     {locations.map((location) => {
                         return (
                             <>
-                                <DisplayCards location={location} setLocation={setLocations} handleDelete={handleDelete}/>
+                                <DisplayCards location={location} setLocation={setLocations} handleDelete={handleDelete} cardDisplay={cardDisplay}/>
                             </>
                         )
                     })}
                 </div>
+                }
             </div>
             <div>
                 <h1>Add New Location</h1>

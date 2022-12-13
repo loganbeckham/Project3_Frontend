@@ -14,6 +14,7 @@ const DisplayCards = (props) => {
                         <p className='card-text'>{props.location.rating} Stars</p>
                     </div>
                     
+                    <button className='btn btn-primary' onClick={(event) => {props.cardDisplay(props.location)}}>See More</button>
                     <button className="btn btn-primary" data-bs-toggle="collapse" href={`#UpdateForm${props.location._id}`} aria-expanded="false" aria-controls={`${props.location._id}UpdateForm`}>
                         Options
                     </button>
