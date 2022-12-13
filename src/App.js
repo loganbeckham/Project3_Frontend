@@ -97,7 +97,14 @@ function App() {
 
     return (
         <>
-        <h1> Travel App</h1>
+            <nav class="navbar navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Traction</a>
+                    <form class="d-flex">
+                    <button class="btn btn-outline-success" type="submit">Sign In</button>
+                    </form>
+                </div>
+            </nav>
             <div>
                 <div className='row'>
                     {locations.map((location) => {
@@ -118,7 +125,7 @@ function App() {
                         zip: <input type="number" onChange={handleNewZip}/><br/>
                         description: <input type="text" onChange={handleNewDescription}/><br/>
                         image: <input type="text" onChange={handleNewImage}/><br/>
-                        rating: <input type="number" onChange={handleNewRating}/><br/>
+                        rating: <input type="range" min="0" max='5' onChange={handleNewRating}/><br/>
                         tags: <input type="text" onChange={handleNewTags}/><br/>
                         <input type="submit" value="Add Location"/>
                     </form>
