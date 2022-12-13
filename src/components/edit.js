@@ -44,7 +44,7 @@ const Edit = (props) => {
         event.preventDefault();
 
         axios.put(
-            `https://project3-travelapp-backend.herokuapp.com/locations/${props.location._id}`,
+            `https://project3-travelapp-backend.herokuapp.com/locations/${props.showLocation._id}`,
             {
                 location: updatedLocation,
                 city: updatedCity,
@@ -56,23 +56,23 @@ const Edit = (props) => {
             }
         ).then(() => {
             axios   
-                .get('https://project3-travelapp-backend.herokuapp.com/locations')
+                .get(`https://project3-travelapp-backend.herokuapp.com/locations/${props.showLocation._id}`)
                 .then((response) => {
-                    props.setLocation(response.data)
+                    props.setShowLocation(response.data)
                 })
         })
     }
 
     return (
             <form className='pt-3' onSubmit={handleUpdateForm}>
-                location: <input type="text" className="form-control" defaultValue={props.location.location} onChange={handleLocationUpdate} /><br />
-                city: <input type="text" className="form-control" defaultValue={props.location.city} onChange={handleCityUpdate} /><br />
-                zip: <input type="number" className="form-control" defaultValue={props.location.zip} onChange={handleZipUpdate} /><br />
-                description: <input type="text" className="form-control" defaultValue={props.location.description} onChange={handleDescriptionUpdate} /><br />
-                image: <input type="text" className="form-control" defaultValue={props.location.image} onChange={handleImageUpdate} /><br />
-                rating: <input type="range" className="form-range" defaultValue={props.location.rating} min="0" max="5" onChange={handleRatingUpdate} /><br />
-                tags: <input type="text" className="form-control" defaultValue={props.location.tags} onChange={handleTagsUpdate} /><br />
-                <button className='btn btn-primary' data-bs-toggle="collapse" href={`#UpdateForm${props.location._id}`} type="submit">Update Location</button>
+                location: <input type="text" className="form-control" defaultValue={props.showLocation.location} onChange={handleLocationUpdate} /><br />
+                city: <input type="text" className="form-control" defaultValue={props.showLocation.city} onChange={handleCityUpdate} /><br />
+                zip: <input type="number" className="form-control" defaultValue={props.showLocation.zip} onChange={handleZipUpdate} /><br />
+                description: <input type="text" className="form-control" defaultValue={props.showLocation.description} onChange={handleDescriptionUpdate} /><br />
+                image: <input type="text" className="form-control" defaultValue={props.showLocation.image} onChange={handleImageUpdate} /><br />
+                rating: <input type="range" className="form-range" defaultValue={props.showLocation.rating} min="0" max="5" onChange={handleRatingUpdate} /><br />
+                tags: <input type="text" className="form-control" defaultValue={props.showLocation.tags} onChange={handleTagsUpdate} /><br />
+                <button className='btn btn-primary' data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} type="submit">Update Location</button>
             </form>
     )
   }
