@@ -61,22 +61,19 @@ const Edit = (props) => {
                     props.setLocation(response.data)
                 })
         })
-        props.setShowUpdateForm(false)
     }
 
     return (
-        <div>
-            <form onSubmit={handleUpdateForm}>
-                location: <input type="text" defaultValue={props.location.location} onChange={handleLocationUpdate} /><br />
-                city: <input type="text" defaultValue={props.location.city} onChange={handleCityUpdate} /><br />
-                zip: <input type="number" defaultValue={props.location.zip} onChange={handleZipUpdate} /><br />
-                description: <input type="text" defaultValue={props.location.description} onChange={handleDescriptionUpdate} /><br />
-                image: <input type="text" defaultValue={props.location.image} onChange={handleImageUpdate} /><br />
-                rating: <input type="number" defaultValue={props.location.rating} onChange={handleRatingUpdate} /><br />
-                tags: <input type="text" defaultValue={props.location.tags} onChange={handleTagsUpdate} /><br />
-                <input type="submit" value="Update Location" />
+            <form className='pt-3' onSubmit={handleUpdateForm}>
+                location: <input type="text" className="form-control" defaultValue={props.location.location} onChange={handleLocationUpdate} /><br />
+                city: <input type="text" className="form-control" defaultValue={props.location.city} onChange={handleCityUpdate} /><br />
+                zip: <input type="number" className="form-control" defaultValue={props.location.zip} onChange={handleZipUpdate} /><br />
+                description: <input type="text" className="form-control" defaultValue={props.location.description} onChange={handleDescriptionUpdate} /><br />
+                image: <input type="text" className="form-control" defaultValue={props.location.image} onChange={handleImageUpdate} /><br />
+                rating: <input type="range" className="form-range" defaultValue={props.location.rating} min="0" max="5" onChange={handleRatingUpdate} /><br />
+                tags: <input type="text" className="form-control" defaultValue={props.location.tags} onChange={handleTagsUpdate} /><br />
+                <button className='btn btn-primary' data-bs-toggle="collapse" href={`#UpdateForm${props.location._id}`} type="submit">Update Location</button>
             </form>
-        </div>
     )
   }
   

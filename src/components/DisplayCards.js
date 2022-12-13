@@ -3,12 +3,6 @@ import Edit from './edit'
 
 const DisplayCards = (props) => {
 
-    const [showUpdateForm, setShowUpdateForm] = useState(false)
-
-    const showForm = () => {
-        setShowUpdateForm(true)
-    }
-
     return (
         <>
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -19,12 +13,19 @@ const DisplayCards = (props) => {
                         <p className='card-text'>{props.location.city}</p>
                         <p className='card-text'>{props.location.rating} Stars</p>
                     </div>
-                    {showUpdateForm ?
-                    <Edit location={props.location} setLocation={props.setLocation} setShowUpdateForm={setShowUpdateForm}/>
-                    :
-                    <button onClick={showForm}>Edit</button>
-                    }
-                    <button onClick={ (event) => {props.handleDelete(props.location)}}>Delete Location</button>
+                    
+                    <button className="btn btn-primary" data-bs-toggle="collapse" href={`#UpdateForm${props.location._id}`} aria-expanded="false" aria-controls={`${props.location._id}UpdateForm`}>
+                        Options
+                    </button>
+                    <div className='row'>
+                        <div className='col'>
+                            <div className='collapse' id={`UpdateForm${props.location._id}`}>
+                                <Edit location={props.location} setLocation={props.setLocation}/>
+                                <button className='btn btn-primary mt-3' data-bs-toggle="collapse" onClick={ (event) => {props.handleDelete(props.location)}}>Delete Location</button> 
+                            </div>
+                        </div>
+                    </div>
+                                       
                 </div>
             </div>
         </>
