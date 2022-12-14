@@ -34,10 +34,10 @@ const ShowCard = (props) => {
         </div>
         <div className="button-container">
             <div className="button-box">
-                <button className="btn btn-primary" data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} aria-expanded="false" aria-controls={`UpdateForm${props.showLocation._id}`}>
+                <button className="btn" data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} aria-expanded="false" aria-controls={`UpdateForm${props.showLocation._id}`}>
                                 Edit
                 </button>
-                <button className='btn btn-primary ms-5' onClick={props.cardDisplay}>back</button>
+                <button className='btn ms-5' onClick={props.cardDisplay}>Back To Browse</button>
             </div>
         </div>
         <div className='row'>
