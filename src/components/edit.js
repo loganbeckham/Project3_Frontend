@@ -64,15 +64,30 @@ const Edit = (props) => {
     }
 
     return (
-            <form className='pt-3' onSubmit={handleUpdateForm}>
-                location: <input type="text" className="form-control" defaultValue={props.showLocation.location} onChange={handleLocationUpdate} /><br />
+            <form className='pt-3 drop-form' onSubmit={handleUpdateForm}>
+                <div className='form-input'>
+                location: <input type="text" className="form-control" defaultValue={props.showLocation.location} onChange={handleLocationUpdate} />
+                </div>
+                <div className='form-input'>
                 city: <input type="text" className="form-control" defaultValue={props.showLocation.city} onChange={handleCityUpdate} /><br />
+                </div>
+                <div className='form-input'>
                 zip: <input type="number" className="form-control" defaultValue={props.showLocation.zip} onChange={handleZipUpdate} /><br />
+                </div>
+                <div className='form-input'>
                 description: <input type="text" className="form-control" defaultValue={props.showLocation.description} onChange={handleDescriptionUpdate} /><br />
+                </div>
+                <div className='form-input'>
                 image: <input type="text" className="form-control" defaultValue={props.showLocation.image} onChange={handleImageUpdate} /><br />
+                </div>
+                <div className='form-input'>
                 rating: <input type="range" className="form-range" defaultValue={props.showLocation.rating} min="0" max="5" onChange={handleRatingUpdate} /><br />
+                </div>
+                <div className='form-input'>
                 tags: <input type="text" className="form-control" defaultValue={props.showLocation.tags} onChange={handleTagsUpdate} /><br />
-                <button className='btn btn-primary' data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} type="submit">Update Location</button>
+                </div>
+                
+                <button className='btn btn-primary submit-drop-form' data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} type="submit">Update Location</button>
             </form>
     )
   }
