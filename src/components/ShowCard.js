@@ -28,24 +28,27 @@ const ShowCard = (props) => {
                     <p className='m-5'>{props.showLocation.tags}</p>        
                 </div>
                 <div className='location-image-container' >
-                    <img className='location-image ms-5 mt-3' style={{minHeight: '50vh'}} src={props.showLocation.image}/>
+                    <img className='location-image mt-3' style={{minHeight: '50vh'}} src={props.showLocation.image}/>
                 </div>
             </div>
         </div>
-
-        <button className="btn btn-primary" data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} aria-expanded="false" aria-controls={`UpdateForm${props.showLocation._id}`}>
-                        Edit
-        </button>
+        <div className="button-container">
+            <div className="button-box">
+                <button className="btn" data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} aria-expanded="false" aria-controls={`UpdateForm${props.showLocation._id}`}>
+                                Edit
+                </button>
+                <button className='btn ms-5' onClick={props.cardDisplay}>Back To Browse</button>
+            </div>
+        </div>
         <div className='row'>
             <div className='col'>
-                <div className='collapse' id={`UpdateForm${props.showLocation._id}`}>
+                <div className='collapse drop-form-div' id={`UpdateForm${props.showLocation._id}`}>
                     <Edit showLocation={props.showLocation} setShowLocation={props.setShowLocation}/>
                     <button className='btn btn-primary mt-3' data-bs-toggle="collapse" onClick={ (event) => {props.handleDelete(props.showLocation)}}>Delete Location</button> 
                 </div>
             </div>
         </div>
 
-        <button className='btn btn-primary ms-5' onClick={props.cardDisplay}>back</button>
         </>
     )
 }

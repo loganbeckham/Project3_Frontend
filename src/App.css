@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+.logo {
+  width: 10vw;
+  max-width: 30px;
+}
+
+.display-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .card {
   /* border-radius: 20px !important; */
   width: 20vw;
@@ -15,6 +26,10 @@
 
 .card-img {
   border-radius: 20px !important;
+  width: 100%;
+  height: 15vw;
+  min-height: 250px;
+  object-fit: cover;
 }
 
 .text-white {
@@ -30,7 +45,12 @@
 .location-body {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap-reverse;
   justify-content: center;
+}
+
+.card {
+  min-width: 400px !important;
 }
 
 .location-image {
@@ -38,4 +58,49 @@
   height: 40vh;
   object-fit: cover;
   border-radius: 50px;
+  min-width: 400px !important;
 }
+
+.drop-form-div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.drop-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.form-input {
+  width: 40vw !important;
+  margin: 1em;
+}
+
+.submit-drop-form {
+  height: 5vh;
+  margin-top: 2.4em;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 12vw;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.button-box {
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  /* justify-content: space-around; */
+}
+

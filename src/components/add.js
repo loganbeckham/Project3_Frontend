@@ -66,16 +66,31 @@ const Add = (props) => {
 
     return (
         <div>
-            <section className="collapse" id="formSection">
-                <form onSubmit={handleNewLocationForm}>
-                    location: <input type="text" className="form-control" onChange={handleNewLocation} /><br />
-                    city: <input type="text" className="form-control" onChange={handleNewCity} /><br />
-                    zip: <input type="number" className="form-control" onChange={handleNewZip} /><br />
-                    description: <input type="text" className="form-control" onChange={handleNewDescription} /><br />
-                    image: <input type="text" className="form-control" onChange={handleNewImage} /><br />
-                    rating: <input type="range" className="form-range" min="0" max="5" onChange={handleNewRating} /><br />
-                    tags: <input type="text" className="form-control" onChange={handleNewTags} /><br />
-                    <button className='btn btn-primary' data-bs-toggle="collapse" href={`#formSection`} type="submit">Submit Attraction</button>
+            <section className="collapse drop-form-div" id="formSection">
+                <form className='drop-form' onSubmit={handleNewLocationForm}>
+                    <div className='form-input'>
+                        location: <input type="text" className="form-control" onChange={handleNewLocation} />
+                    </div>
+                    <div className='form-input'>
+                    city: <input type="text" className="form-control" onChange={handleNewCity} />
+                    </div>
+                    <div className='form-input'>
+                    zip: <input type="number" className="form-control" onChange={handleNewZip} />
+                    </div>
+                    <div className='form-input'>
+                    description: <input type="text" className="form-control" onChange={handleNewDescription} />
+                    </div>
+                    <div className='form-input'>
+                    image: <input type="text" className="form-control" onChange={handleNewImage} />
+                    </div>
+                    <div className='form-input'>
+                    rating: <input type="range" className="form-range" min="0" max="5" onChange={handleNewRating} />
+                    </div>
+                    <div className='form-input'>
+                    tags: <input type="text" className="form-control" onChange={handleNewTags} />
+                    </div>
+                    
+                    <button className='btn btn-primary submit-drop-form' data-bs-toggle="collapse" href={`#formSection`} type="submit">Submit Attraction</button>
                 </form>
             </section>
         </div>
