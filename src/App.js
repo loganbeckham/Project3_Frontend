@@ -40,7 +40,11 @@ function App() {
 
     const cardDisplay = (props) => {
         setShowCard(!showCard)
-        setShowLocation(props)
+        axios
+            .get('https://project3-travelapp-backend.herokuapp.com/locations')
+            .then((response) => {
+                setLocations(response.data)
+            })
     }
 
     // GET ROUTE
