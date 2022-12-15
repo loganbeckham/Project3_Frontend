@@ -149,7 +149,9 @@ function App() {
                 </div>
             </nav>
             <div>
-                
+                <form>
+                    <input type="text" onChange={(event) => searchItems(event.target.value)}/>
+                </form>
             </div>
             <div>
                 { showCard ?
