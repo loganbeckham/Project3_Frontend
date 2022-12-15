@@ -59,7 +59,7 @@ function App() {
     const deleteSession = () => {
         axios.delete('https://project3-travelapp-backend.herokuapp.com/sessions', { withCredentials: true }).then(() => {
             axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new').then((response) => {
-                setCurrentUser(response.data)
+                // setCurrentUser(response.data)
                 console.log(response)
             })
 
