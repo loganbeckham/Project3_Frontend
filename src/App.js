@@ -18,12 +18,19 @@ function App() {
 
     const [searchInput, setSearchInput] = useState('')
     const [filteredResults, setFilteredResults]  = useState([])
-    const [search, setSearch] = useState('')
 
 
     const searchItems = (searchValue) => {
-        setSearch(searchValue)
+        setSearchInput(searchValue)
+        if (searchValue.length > 0) {
+            const searchResults = locations.filter((results) => {
+                return Object.values(results).join('').toLowerCase().includes(searchInput.toLowerCase())
+            })
+        setFilteredResults(searchResults)
+        } else {
+        setFilteredResults(locations)
         }
+    }
 
     const cardDisplay = (props) => {
         setShowCard(!showCard)
@@ -32,24 +39,13 @@ function App() {
 
     // GET ROUTE
     useEffect(() => {
-        const getAllLocations = async () => {
-            try {
-                const url = `https://project3-travelapp-backend.herokuapp.com/locations?search=${search}`
-                const {data} = await axios.get(url)
-                setFilteredResults(data);
-                console.log(data)
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        // axios
-        //     .get('https://project3-travelapp-backend.herokuapp.com/locations')
-        //     .then((response) => {
-        //         setLocations(response.data)
-        //         setFilteredResults(response.data)
-        //     })
-        getAllLocations();
-    }, [search])
+        axios
+            .get('https://project3-travelapp-backend.herokuapp.com/locations')
+            .then((response) => {
+                setLocations(response.data)
+                setFilteredResults(response.data)
+            })
+    }, [])
 
 
     // DELETE ROUTE
@@ -83,9 +79,7 @@ function App() {
             </nav>
             <div>
                 <form className='d-flex justify-content-center'>
-                    <div className='input-group w-50 mt-3'>
-                        <input className="form-control" placeholder='search by name, city, or keywords' type="text" onChange={(event) => searchItems(event.target.value)}/>
-                    </div>
+                    <input className="form-control w-50 mt-3" placeholder='search by name, city, or keywords' type="text" onChange={(event) => searchItems(event.target.value)}/>
                 </form>
             </div>
             <div>
