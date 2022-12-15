@@ -51,7 +51,13 @@ function App() {
                 setLocations(response.data)
                 setFilteredResults(response.data)
             })
-    })
+        axios
+            .get('https://project3-travelapp-backend.herokuapp.com/sessions/new', { withCredentials: true })
+            .then((response) => {
+                setCurrentUser(response.data.username)
+                console.log(response);
+        })
+    }, [])
 
 
     // DELETE ROUTE
@@ -91,6 +97,7 @@ function App() {
             })
         })
     }
+
     const createUser = (event) => {
         event.preventDefault();
         axios.post('https://project3-travelapp-backend.herokuapp.com/users', {
@@ -115,10 +122,7 @@ function App() {
     }
 
     useEffect(() => {
-        axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new', { withCredentials: true }).then((response) => {
-            setCurrentUser(response.data.username)
-            console.log(response);
-        })
+
     }, [])
 
     //////////////////////    
@@ -161,7 +165,7 @@ function App() {
             <div>
                 { showCard ?
                 <>
-                    <ShowCard showLocation={showLocation} setShowLocation={setShowLocation} cardDisplay={cardDisplay} handleDelete={handleDelete}/>
+                    <ShowCard showLocation={showLocation} setShowLocation={setShowLocation} cardDisplay={cardDisplay} handleDelete={handleDelete} setLocations={setLocations}/>
                 </>
                 :
                 <>

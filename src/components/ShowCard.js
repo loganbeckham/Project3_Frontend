@@ -43,7 +43,7 @@ const ShowCard = (props) => {
         <div className='row'>
             <div className='col'>
                 <div className='collapse drop-form-div' id={`UpdateForm${props.showLocation._id}`}>
-                    <Edit showLocation={props.showLocation} setShowLocation={props.setShowLocation}/>
+                    <Edit showLocation={props.showLocation} setLocations={props.setLocations} setShowLocation={props.setShowLocation}/>
                     <button className='btn btn-primary mt-3' data-bs-toggle="collapse" onClick={ (event) => {props.handleDelete(props.showLocation)}}>Delete Location</button> 
                 </div>
             </div>
