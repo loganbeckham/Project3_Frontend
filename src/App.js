@@ -11,6 +11,21 @@ import ShowCard from './components/ShowCard'
 
 function App() {
 
+    const [locations, setLocations] = useState([])
+
+    const [showCard, setShowCard] = useState(false)
+    const [showLocation, setShowLocation] = useState([])
+
+    const [searchInput, setSearchInput] = useState('')
+    const [filteredResults, setFilteredResults]  = useState([])
+
+    /////////login////////
+    const [newUser, setNewUser] = useState()
+    const [newPassword, setNewPassword] = useState()
+    const [currentUser, setCurrentUser] = useState()
+    const [showRegister, setShowRegister] = useState(true)
+    ///////////////////////
+
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
         if (searchValue.length > 0) {
@@ -54,19 +69,6 @@ function App() {
         cardDisplay()
     }
 
-    /////////login////////
-    const [newUser, setNewUser] = useState()
-    const [newPassword, setNewPassword] = useState()
-    const [currentUser, setCurrentUser] = useState()
-    const [showRegister, setShowRegister] = useState(true)
-    ///////////////////////
-    const [locations, setLocations] = useState([])
-
-    const [showCard, setShowCard] = useState(false)
-    const [showLocation, setShowLocation] = useState([])
-
-    const [searchInput, setSearchInput] = useState('')
-    const [filteredResults, setFilteredResults]  = useState([])
 
     ////////login/////////
     const handleNewUser = (event) => {
