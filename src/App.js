@@ -3,73 +3,93 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
+import logo from './img/map-arrow-icon-614x460.png'
 
 import DisplayCards from './components/DisplayCards'
+import Add from './components/add';
+import ShowCard from './components/ShowCard'
 
 function App() {
-
+    /////////login////////
+    const [newUser, setNewUser] = useState()
+	const [newPassword, setNewPassword] = useState()
+	const [currentUser, setCurrentUser] = useState()
+	const [showRegister, setShowRegister] = useState(true)
+    ///////////////////////
     const [locations, setLocations] = useState([])
-    //POST VARIABLES
-    const [newLocation, setNewLocation] = useState('')
-    const [newCity, setNewCity] = useState('')
-    const [newZip, setNewZip] = useState('')
-    const [newDescription, setNewDescription] = useState('')
-    const [newImage, setNewImage] = useState('')
-    const [newRating, setNewRating] = useState('')
-    const [newTags, setNewTags] = useState('')
 
+    const [showCard, setShowCard] = useState(false)
+    const [showLocation, setShowLocation] = useState([])
 
-    // POST FORM FUNCTIONS
-    const handleNewLocation = (event) => {
-        setNewLocation(event.target.value)
+    const [searchInput, setSearchInput] = useState('')
+    const [filteredResults, setFilteredResults]  = useState([])
+
+    ////////login/////////
+    const handleNewUser = (event) => {
+        setNewUser(event.target.value)
     }
-
-    const handleNewCity = (event) => {
-        setNewCity(event.target.value)
+    const handleNewPassword = (event) => {
+        setNewPassword(event.target.value)
     }
-
-    const handleNewZip = (event) => {
-        setNewZip(event.target.value)
-    }
-
-    const handleNewDescription = (event) => {
-        setNewDescription(event.target.value)
-    }
-
-    const handleNewImage = (event) => {
-        setNewImage(event.target.value)
-    }
-
-    const handleNewRating = (event) => {
-        setNewRating(event.target.value)
-    }
-
-    const handleNewTags = (event) => {
-        setNewTags(event.target.value)
-    }
-
-    // POST ROUTE
-    const handleNewLocationForm = (event) => {
-        event.preventDefault()
-        axios.post(
-            'https://project3-travelapp-backend.herokuapp.com/locations',
-            {
-                location: newLocation,
-                city: newCity,
-                zip: newZip,
-                description: newDescription,
-                image: newImage,
-                rating: newRating,
-                tags: newTags,
-            }
-        ).then(() => {
-            axios   
-                .get('https://project3-travelapp-backend.herokuapp.com/locations')
-                .then((response) => {
-                    setLocations(response.data)
-                })
+    const createSession = (event)=>{
+		event.preventDefault();
+		axios.post('https://project3-travelapp-backend.herokuapp.com/sessions', {
+			username: newUser,
+			password: newPassword
+		}, {withCredentials:true}).then(()=>{
+			axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new', {withCredentials:true}).then((response) => {
+				setCurrentUser(response.data.username)
+			  console.log(response.data)
+			})
+		})
+	}
+    const createUser = (event) => {
+        event.preventDefault();
+        axios.post('https://project3-travelapp-backend.herokuapp.com/users', {
+            username: newUser,
+            password: newPassword
+        }, { withCredentials: true }).then((response) => {
+            setCurrentUser(response.data)
+            console.log(response.data);
+            setShowRegister(false)
         })
-        event.target.reset()
+
+    }
+
+    const deleteSession = () => {
+        axios.delete('https://project3-travelapp-backend.herokuapp.com/sessions', { withCredentials: true }).then(() => {
+            axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new').then((response) => {
+                setCurrentUser(response.data)
+                console.log(response)
+            })
+
+        })
+    }
+
+    useEffect(() => {
+        axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new', { withCredentials: true }).then((response) => {
+            setCurrentUser(response.data.username)
+            console.log(response);
+        })
+    }, [])
+
+    //////////////////////    
+
+    const searchItems = (searchValue) => {
+        setSearchInput(searchValue)
+        if (searchValue.length > 0) {
+            const searchResults = locations.filter((results) => {
+                return Object.values(results).join('').toLowerCase().includes(searchInput.toLowerCase())
+            })
+        setFilteredResults(searchResults)
+        } else {
+        setFilteredResults(locations)
+        }
+    }
+
+    const cardDisplay = (props) => {
+        setShowCard(!showCard)
+        setShowLocation(props)
     }
 
     // GET ROUTE
@@ -78,11 +98,14 @@ function App() {
             .get('https://project3-travelapp-backend.herokuapp.com/locations')
             .then((response) => {
                 setLocations(response.data)
+                setFilteredResults(response.data)
             })
-    })
+    }, [])
+
 
     // DELETE ROUTE
     const handleDelete = (locationData) => {
+        console.log(locationData._id)
         axios
             .delete(`https://project3-travelapp-backend.herokuapp.com/locations/${locationData._id}`)
             .then(() => {
@@ -92,45 +115,66 @@ function App() {
                         setLocations(response.data)
                     })
                 })
+        cardDisplay()
     }
 
 
     return (
         <>
-            <nav class="navbar navbar-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand">Traction</a>
-                    <form class="d-flex">
-                    <button class="btn btn-outline-success" type="submit">Sign In</button>
+            <nav className="navbar navbar-light">
+                <div className="container-fluid mt-4">
+                    <div className='nav-logo'>
+                        <a href='/'><img src={logo} className="logo ms-4"/></a>
+                        <a href='/' className="navbar-brand ms-2">Traction</a>
+                    </div>
+                    <form className="d-flex me-4">
+                        <input type="text" placeholder='Search' onChange={(event) => searchItems(event.target.value)}/>
+                    </form>
+                    <h1>{currentUser}</h1>
+                    <form onSubmit={createUser}>
+                        
+                        <input type='username' placeholder='username' onChange={handleNewUser} />
+                        <input type='password' placeholder='password' onChange={handleNewPassword} />
+                        <input type='submit' value='Register' />
+                    </form>
+                    {/* : */}
+                    <form onSubmit={createSession}>
+                        <input type='username' placeholder='username' onChange={handleNewUser} />
+                        <input type='password' placeholder='password' onChange={handleNewPassword} />
+                        <input type='submit' value='Login' />
+                    </form>
+                    <form onSubmit={deleteSession}>
+                        <input type='submit' value='Logout' />
                     </form>
                 </div>
             </nav>
             <div>
-                <div className='row'>
-                    {locations.map((location) => {
-                        return (
-                            <>
-                                <DisplayCards location={location} setLocation={setLocations} handleDelete={handleDelete}/>
-                            </>
-                        )
-                    })}
-                </div>
+                
             </div>
             <div>
-                <h1>Add New Location</h1>
-                <section>
-                    <form onSubmit={handleNewLocationForm}>
-                        location: <input type="text" onChange={handleNewLocation}/><br/>
-                        city: <input type="text" onChange={handleNewCity}/><br/>
-                        zip: <input type="number" onChange={handleNewZip}/><br/>
-                        description: <input type="text" onChange={handleNewDescription}/><br/>
-                        image: <input type="text" onChange={handleNewImage}/><br/>
-                        rating: <input type="range" min="0" max='5' onChange={handleNewRating}/><br/>
-                        tags: <input type="text" onChange={handleNewTags}/><br/>
-                        <input type="submit" value="Add Location"/>
-                    </form>
-                </section>
+                { showCard ?
+                <>
+                    <ShowCard showLocation={showLocation} setShowLocation={setShowLocation} cardDisplay={cardDisplay} handleDelete={handleDelete}/>
+                </>
+                :
+                <>
+                    <div className='row'>
+                        {filteredResults.map((filteredResults) => {
+                            return (
+                                <>
+                                    <DisplayCards filteredResults={filteredResults} setLocation={setLocations} handleDelete={handleDelete} cardDisplay={cardDisplay}/>
+                                </>
+                            )
+                        })}
+                    </div>
+                    <button className="btn m-5" data-bs-toggle="collapse" href={`#formSection`} aria-expanded="false" aria-controls={`#formSection`}>
+                        Add New Location
+                    </button>
+                    <Add setLocation={setLocations} />
+                </>
+                }
             </div>
+            
         </>
     )
 }
