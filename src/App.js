@@ -181,7 +181,7 @@ function App() {
                     <button className="btn m-5" data-bs-toggle="collapse" href={`#formSection`} aria-expanded="false" aria-controls={`#formSection`}>
                         Add New Location
                     </button>
-                    <Add setLocation={setLocations} />
+                    <Add setLocations={setLocations} />
                 </>
                 }
             </div>
