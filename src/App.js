@@ -10,70 +10,6 @@ import Add from './components/add';
 import ShowCard from './components/ShowCard'
 
 function App() {
-    /////////login////////
-    const [newUser, setNewUser] = useState()
-	const [newPassword, setNewPassword] = useState()
-	const [currentUser, setCurrentUser] = useState()
-	const [showRegister, setShowRegister] = useState(true)
-    ///////////////////////
-    const [locations, setLocations] = useState([])
-
-    const [showCard, setShowCard] = useState(false)
-    const [showLocation, setShowLocation] = useState([])
-
-    const [searchInput, setSearchInput] = useState('')
-    const [filteredResults, setFilteredResults]  = useState([])
-
-    ////////login/////////
-    const handleNewUser = (event) => {
-        setNewUser(event.target.value)
-    }
-    const handleNewPassword = (event) => {
-        setNewPassword(event.target.value)
-    }
-    const createSession = (event)=>{
-		event.preventDefault();
-		axios.post('https://project3-travelapp-backend.herokuapp.com/sessions', {
-			username: newUser,
-			password: newPassword
-		}, {withCredentials:true}).then(()=>{
-			axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new', {withCredentials:true}).then((response) => {
-				setCurrentUser(response.data.username)
-			  console.log(response.data)
-			})
-		})
-	}
-    const createUser = (event) => {
-        event.preventDefault();
-        axios.post('https://project3-travelapp-backend.herokuapp.com/users', {
-            username: newUser,
-            password: newPassword
-        }, { withCredentials: true }).then((response) => {
-            setCurrentUser(response.data)
-            console.log(response.data);
-            setShowRegister(false)
-        })
-
-    }
-
-    const deleteSession = () => {
-        axios.delete('https://project3-travelapp-backend.herokuapp.com/sessions', { withCredentials: true }).then(() => {
-            axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new').then((response) => {
-                // setCurrentUser(response.data)
-                console.log(response)
-            })
-
-        })
-    }
-
-    useEffect(() => {
-        axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new', { withCredentials: true }).then((response) => {
-            setCurrentUser(response.data.username)
-            console.log(response);
-        })
-    }, [])
-
-    //////////////////////    
 
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
@@ -117,6 +53,71 @@ function App() {
                 })
         cardDisplay()
     }
+
+    /////////login////////
+    const [newUser, setNewUser] = useState()
+    const [newPassword, setNewPassword] = useState()
+    const [currentUser, setCurrentUser] = useState()
+    const [showRegister, setShowRegister] = useState(true)
+    ///////////////////////
+    const [locations, setLocations] = useState([])
+
+    const [showCard, setShowCard] = useState(false)
+    const [showLocation, setShowLocation] = useState([])
+
+    const [searchInput, setSearchInput] = useState('')
+    const [filteredResults, setFilteredResults]  = useState([])
+
+    ////////login/////////
+    const handleNewUser = (event) => {
+        setNewUser(event.target.value)
+    }
+    const handleNewPassword = (event) => {
+        setNewPassword(event.target.value)
+    }
+    const createSession = (event)=>{
+        event.preventDefault();
+        axios.post('https://project3-travelapp-backend.herokuapp.com/sessions', {
+            username: newUser,
+            password: newPassword
+        }, {withCredentials:true}).then(()=>{
+            axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new', {withCredentials:true}).then((response) => {
+                setCurrentUser(response.data.username)
+                console.log(response.data)
+            })
+        })
+    }
+    const createUser = (event) => {
+        event.preventDefault();
+        axios.post('https://project3-travelapp-backend.herokuapp.com/users', {
+            username: newUser,
+            password: newPassword
+        }, { withCredentials: true }).then((response) => {
+            setCurrentUser(response.data)
+            console.log(response.data);
+            setShowRegister(false)
+        })
+
+    }
+
+    const deleteSession = () => {
+        axios.delete('https://project3-travelapp-backend.herokuapp.com/sessions', { withCredentials: true }).then(() => {
+            axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new').then((response) => {
+                // setCurrentUser(response.data)
+                console.log(response)
+            })
+
+        })
+    }
+
+    useEffect(() => {
+        axios.get('https://project3-travelapp-backend.herokuapp.com/sessions/new', { withCredentials: true }).then((response) => {
+            setCurrentUser(response.data.username)
+            console.log(response);
+        })
+    }, [])
+
+    //////////////////////    
 
 
     return (
