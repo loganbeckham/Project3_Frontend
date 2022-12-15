@@ -51,7 +51,7 @@ function App() {
                 setLocations(response.data)
                 setFilteredResults(response.data)
             })
-    }, [])
+    })
 
 
     // DELETE ROUTE
@@ -74,9 +74,11 @@ function App() {
     const handleNewUser = (event) => {
         setNewUser(event.target.value)
     }
+
     const handleNewPassword = (event) => {
         setNewPassword(event.target.value)
     }
+
     const createSession = (event)=>{
         event.preventDefault();
         axios.post('https://project3-travelapp-backend.herokuapp.com/sessions', {
