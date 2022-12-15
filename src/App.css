@@ -18,6 +18,8 @@
   width: 20vw;
   height: 20vh;
   border-style: hidden !important;
+  min-width: 400px !important;
+  --bs-card-bg: none !important;
 }
 
 .card:hover {
@@ -47,10 +49,6 @@
   flex-direction: row;
   flex-wrap: wrap-reverse;
   justify-content: center;
-}
-
-.card {
-  min-width: 400px !important;
 }
 
 .location-image {

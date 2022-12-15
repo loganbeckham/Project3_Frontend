@@ -72,14 +72,15 @@ function App() {
                         <a href='/'><img src={logo} className="logo ms-4"/></a>
                         <a href='/' className="navbar-brand ms-2">Traction</a>
                     </div>
-                    <form className="d-flex me-4">
-                        <input type="text" onChange={(event) => searchItems(event.target.value)}/>
+                    <div className="d-flex me-4">
                         <button className="btn" type="submit">Sign In</button>
-                    </form>
+                    </div>
                 </div>
             </nav>
             <div>
-                
+                <form className='d-flex justify-content-center'>
+                    <input className="form-control w-50 mt-3" placeholder='search by name, city, or keywords' type="text" onChange={(event) => searchItems(event.target.value)}/>
+                </form>
             </div>
             <div>
                 { showCard ?
