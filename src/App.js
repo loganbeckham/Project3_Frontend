@@ -77,8 +77,8 @@ function App() {
                 </div>
             </nav>
             <div>
-                <form>
-                    <input type="text" onChange={(event) => searchItems(event.target.value)}/>
+                <form className='d-flex justify-content-center'>
+                    <input className='form-control w-50 my-4' type="text" onChange={(event) => searchItems(event.target.value)}/>
                 </form>
             </div>
             <div>
