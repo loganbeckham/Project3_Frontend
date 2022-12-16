@@ -65,31 +65,15 @@ function App() {
 
     return (
         <>
-            <nav className="navbar navbar-light">
+             <nav className="navbar navbar-light">
                 <div className="container-fluid mt-4">
                     <div className='nav-logo'>
                         <a href='/'><img src={logo} className="logo ms-4"/></a>
                         <a href='/' className="navbar-brand ms-2">Traction</a>
                     </div>
-                    <form className="d-flex me-4">
-                        <input type="text" placeholder='Search' onChange={(event) => searchItems(event.target.value)}/>
-                    </form>
-                    <h1>{currentUser}</h1>
-                    <form onSubmit={createUser}>
-                        
-                        <input type='username' placeholder='username' onChange={handleNewUser} />
-                        <input type='password' placeholder='password' onChange={handleNewPassword} />
-                        <input type='submit' value='Register' />
-                    </form>
-                    {/* : */}
-                    <form onSubmit={createSession}>
-                        <input type='username' placeholder='username' onChange={handleNewUser} />
-                        <input type='password' placeholder='password' onChange={handleNewPassword} />
-                        <input type='submit' value='Login' />
-                    </form>
-                    <form onSubmit={deleteSession}>
-                        <input type='submit' value='Logout' />
-                    </form>
+                    <div className="d-flex me-4">
+                        <button className="btn" type="submit">Sign In</button>
+                    </div>
                 </div>
             </nav>
             <div>
