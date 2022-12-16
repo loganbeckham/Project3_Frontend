@@ -56,6 +56,11 @@ const Edit = (props) => {
             }
         ).then(() => {
             axios
+                .get(`https://project3-travelapp-backend.herokuapp.com/locations`)
+                .then((response) => {
+                    props.setFilteredResults(response.data)
+                })
+            axios
                 .get(`https://project3-travelapp-backend.herokuapp.com/locations/${props.showLocation._id}`)
                 .then((response) => {
                     props.setShowLocation(response.data)

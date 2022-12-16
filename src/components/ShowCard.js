@@ -37,13 +37,13 @@ const ShowCard = (props) => {
                 <button className="btn" data-bs-toggle="collapse" href={`#UpdateForm${props.showLocation._id}`} aria-expanded="false" aria-controls={`UpdateForm${props.showLocation._id}`}>
                                 Edit
                 </button>
-                <button className='btn ms-5' onClick={props.cardDisplay}>Back To Browse</button>
+                <button className='btn ms-5' onClick={(event) => {props.cardDisplay(props.locations)}}>Back To Browse</button>
             </div>
         </div>
         <div className='row'>
             <div className='col'>
                 <div className='collapse drop-form-div' id={`UpdateForm${props.showLocation._id}`}>
-                    <Edit showLocation={props.showLocation} setLocations={props.setLocations} setShowLocation={props.setShowLocation}/>
+                    <Edit showLocation={props.showLocation} setFilteredResults={props.setFilteredResults} locations={props.locations} setLocations={props.setLocations} setShowLocation={props.setShowLocation}/>
                     <button className='btn btn-primary mt-3' data-bs-toggle="collapse" onClick={ (event) => {props.handleDelete(props.showLocation)}}>Delete Location</button> 
                 </div>
             </div>

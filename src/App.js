@@ -32,9 +32,9 @@ function App() {
         }
     }
 
-    const cardDisplay = (props) => {
+    const cardDisplay = (results) => {
         setShowCard(!showCard)
-        setShowLocation(props)
+        setShowLocation(results)
     }
 
     // GET ROUTE
@@ -56,7 +56,7 @@ function App() {
                 axios
                     .get('https://project3-travelapp-backend.herokuapp.com/locations')
                     .then((response) => {
-                        setLocations(response.data)
+                        setFilteredResults(response.data)
                     })
                 })
         cardDisplay()
@@ -84,7 +84,7 @@ function App() {
             <div>
                 { showCard ?
                 <>
-                    <ShowCard showLocation={showLocation} setShowLocation={setShowLocation} cardDisplay={cardDisplay} handleDelete={handleDelete} setLocations={setLocations}/>
+                    <ShowCard filteredResults={filteredResults} setFilteredResults={setFilteredResults} locations={locations} showLocation={showLocation} setShowLocation={setShowLocation} cardDisplay={cardDisplay} handleDelete={handleDelete} setLocations={setLocations}/>
                 </>
                 :
                 <>
@@ -100,7 +100,7 @@ function App() {
                     <button className="btn m-5" data-bs-toggle="collapse" href={`#formSection`} aria-expanded="false" aria-controls={`#formSection`}>
                         Add New Location
                     </button>
-                    <Add setLocations={setLocations} />
+                    <Add setLocations={setLocations} setFilteredResults={setFilteredResults}/>
                 </>
                 }
             </div>

@@ -58,7 +58,7 @@ const Add = (props) => {
             axios   
                 .get('https://project3-travelapp-backend.herokuapp.com/locations')
                 .then((response) => {
-                    props.setLocations(response.data)
+                    props.setFilteredResults(response.data)
                 })
         })
         event.target.reset()
